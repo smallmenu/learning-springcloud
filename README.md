@@ -1,2 +1,0 @@
-# learning-springcloud
-learning springcloud
