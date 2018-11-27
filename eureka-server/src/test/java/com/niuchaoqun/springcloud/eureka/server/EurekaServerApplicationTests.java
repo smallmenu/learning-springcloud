@@ -1,4 +1,4 @@
-package com.niuchaoqun.springcloud.eureka;
+package com.niuchaoqun.springcloud.eureka.server;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
