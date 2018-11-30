@@ -34,11 +34,12 @@ public class IndexController {
         return Response.success();
     }
 
-    @RequestMapping(value = "/post_param", method = RequestMethod.POST)
-    public Object postParam(@RequestParam(value = "param1", required = false) String param1) {
-        logger.info(param1);
-        if (param1 != null) {
-            return Response.data(param1);
+    @RequestMapping("/get_sleep")
+    public Object getSleep() {
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
         return Response.success();
     }
