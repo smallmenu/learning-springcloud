@@ -30,6 +30,8 @@ public class FeignController {
 
     @RequestMapping("/get_param")
     public String getParam(@RequestParam(value = "param1", required = false) String param1) {
+        logger.info(param1);
+
         long start = System.currentTimeMillis();
         String result = eurekaClient.getParam(param1);
         logger.info("{}ms, result:{}", System.currentTimeMillis() - start, result);

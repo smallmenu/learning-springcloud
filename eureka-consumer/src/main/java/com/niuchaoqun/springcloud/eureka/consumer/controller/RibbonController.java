@@ -42,6 +42,7 @@ public class RibbonController {
 
     @RequestMapping("/get_param/{serviceId}")
     public String getParam(@PathVariable String serviceId, @RequestParam String param1) {
+        logger.info(param1);
         String result = restTemplate.getForObject("http://" + serviceId + "/get_param?param1={1}", String.class, param1);
         logger.info(result);
 
