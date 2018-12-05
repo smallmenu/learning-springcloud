@@ -1,0 +1,26 @@
+server:
+  port: 9300
+
+spring:
+  application:
+    name: HYSTRIX-TURBINE
+
+eureka:
+  instance:
+    instance-id: ${spring.application.name}:${server.port}
+    prefer-ip-address: true
+    lease-renewal-interval-in-seconds: 10
+    lease-expiration-duration-in-seconds: 20
+  client:
+    service-url:
+      defaultZone: http://localhost:9000/eureka
+    register-with-eureka: true
+    fetch-registry: true
+    registry-fetch-interval-seconds: 10
+
+turbine:
+  app-config: EUREKA-CLIENT,EUREKA-CONSUMER
+  cluster-name-expression: "default"
+  combine-host-port: true
+
+

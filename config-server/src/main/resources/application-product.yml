@@ -1,0 +1,7 @@
+spring:
+  cloud:
+    config:
+      server:
+        git:
+          username: smallmenu@163.com
+          password: 7685801compaq
