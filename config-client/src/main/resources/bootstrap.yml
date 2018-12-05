@@ -1,5 +1,5 @@
 server:
-  port: 9010
+  port: 8081
 
 spring:
   application:
@@ -9,7 +9,7 @@ spring:
       discovery:
         enabled: true
         service-id: CONFIG-SERVER
-      profile: product
+      profile: default
       label: master
 
 eureka:

@@ -49,4 +49,13 @@ spring.cloud.config.server.git.uri=https://github.com/smallmenu/learning-springc
 spring.cloud.config.server.git.username=
 # Git 密码
 spring.cloud.config.server.git.password=
+
+# 客户端开启配置主动发现
+spring.cloud.config.discovery.enabled=true
+# 指定配置中心服务ID
+spring.cloud.config.server-id=CONFIG-SERVER
+# 指定获取的配置 profile
+spring.cloud.config.profile=product
+# 指定分支
+spring.cloud.config.label=master
 ```
