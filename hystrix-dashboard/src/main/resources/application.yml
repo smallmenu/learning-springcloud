@@ -2,4 +2,26 @@ server:
   port: 9200
 spring:
   application:
-    name:HYSTRIX-DASHBOARD
+    name: HYSTRIX-DASHBOARD
+
+eureka:
+  instance:
+    instance-id: ${spring.application.name}:${server.port}
+    prefer-ip-address: true
+    lease-renewal-interval-in-seconds: 10
+    lease-expiration-duration-in-seconds: 20
+  client:
+    service-url:
+      defaultZone: http://localhost:9000/eureka
+    register-with-eureka: true
+    fetch-registry: true
+    registry-fetch-interval-seconds: 10
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always

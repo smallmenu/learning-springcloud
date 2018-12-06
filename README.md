@@ -58,4 +58,17 @@ spring.cloud.config.server-id=CONFIG-SERVER
 spring.cloud.config.profile=product
 # 指定分支
 spring.cloud.config.label=master
+
+###########
+# Hystrix #
+###########
+# 开启 Feign Hystrix
+feign.hystrix.enabled=true
+
+# 指定需要收集监控信息的服务名
+turbine.app-config=EUREKA-CLIENT,EUREKA-CONSUMER
+# 指定聚合集群名称
+turbine.cluster-name-expression
+# 通过主机加端口来进行组合区分
+# turbine.combine-host-port
 ```

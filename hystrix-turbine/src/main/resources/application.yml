@@ -23,4 +23,11 @@ turbine:
   cluster-name-expression: "default"
   combine-host-port: true
 
-
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
