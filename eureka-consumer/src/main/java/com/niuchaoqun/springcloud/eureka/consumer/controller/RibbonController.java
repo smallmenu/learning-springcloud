@@ -1,6 +1,11 @@
 package com.niuchaoqun.springcloud.eureka.consumer.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.niuchaoqun.springcloud.commons.rest.RestResponse;
+import com.niuchaoqun.springcloud.commons.rest.RestResult;
+import com.niuchaoqun.springcloud.eureka.consumer.domain.Record;
+import com.niuchaoqun.springcloud.eureka.consumer.domain.RestRecord;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
+
+import java.io.IOException;
 
 /**
  * Ribbon
@@ -44,9 +51,34 @@ public class RibbonController {
     public String getParam(@PathVariable String serviceId, @RequestParam String param1) {
         logger.info(param1);
         String result = restTemplate.getForObject("http://" + serviceId + "/get_param?param1={1}", String.class, param1);
-        logger.info(result);
+
+        ObjectMapper mapper = new ObjectMapper();
+        RestResult restResult = null;
+        try {
+            restResult = mapper.readValue(result, RestResult.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        logger.info(restResult.toString());
 
         return result;
+    }
+
+    @RequestMapping("/get_record/{serviceId}")
+    public RestResult<Record> getRecord(@PathVariable String serviceId) {
+        String json = restTemplate.getForObject("http://" + serviceId + "/get_record", String.class);
+
+        ObjectMapper mapper = new ObjectMapper();
+        RestRecord result = null;
+        try {
+            result = mapper.readValue(json, RestRecord.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        logger.info(result.toString());
+
+        return RestResponse.data(result.getData());
     }
 
     @RequestMapping("/get_sleep/{serviceId}")

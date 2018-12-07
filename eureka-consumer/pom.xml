@@ -33,6 +33,11 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.niuchaoqun.springcloud</groupId>
+            <artifactId>commons</artifactId>
+            <version>1.0</version>
+        </dependency>
     </dependencies>
 
     <build>

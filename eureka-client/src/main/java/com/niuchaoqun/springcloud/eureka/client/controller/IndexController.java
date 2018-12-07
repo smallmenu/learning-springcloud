@@ -1,6 +1,10 @@
 package com.niuchaoqun.springcloud.eureka.client.controller;
 
-import com.niuchaoqun.springcloud.eureka.client.Response;
+import com.niuchaoqun.springcloud.commons.rest.RestResponse;
+import com.niuchaoqun.springcloud.commons.rest.RestResult;
+import com.niuchaoqun.springcloud.eureka.client.domain.Record;
+import com.niuchaoqun.springcloud.eureka.client.domain.User;
+import com.niuchaoqun.springcloud.eureka.client.domain.UserDetail;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,26 +25,36 @@ public class IndexController {
     }
 
     @RequestMapping(value = "/get", method = RequestMethod.GET)
-    public Object get() {
-        return Response.success();
+    public RestResult get() {
+        return RestResponse.success();
     }
 
     @RequestMapping(value = "/get_param", method = RequestMethod.GET)
-    public Object getParam(@RequestParam(value = "param1", required = false) String param1) {
+    public RestResult getParam(@RequestParam(value = "param1", required = false) String param1) {
         logger.info(param1);
         if (param1 != null) {
-            return Response.data(param1);
+            return RestResponse.data(param1);
         }
-        return Response.success();
+        return RestResponse.success();
     }
 
+    @RequestMapping(value = "/get_record", method = RequestMethod.GET)
+    public RestResult<Record> getRecord() {
+        User user = User.builder().id(1L).name("索思").build();
+        UserDetail detail = UserDetail.builder().address("上海徐汇区").build();
+        Record record = Record.builder().user(user).detial(detail).build();
+        return RestResponse.data(record);
+    }
+
+
+
     @RequestMapping("/get_sleep")
-    public Object getSleep() {
+    public RestResult getSleep() {
         try {
             Thread.sleep(5000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        return Response.success();
+        return RestResponse.success();
     }
 }
