@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: STREAM-SINK
+  cloud:
+    stream:
+      bindings:
+        input:
+          destination: topic
+        output:
+          destination: topic
