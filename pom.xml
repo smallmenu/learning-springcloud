@@ -25,6 +25,7 @@
     </parent>
 
     <modules>
+        <module>commons</module>
         <module>admin</module>
         <module>eureka-server</module>
         <module>eureka-client</module>
