@@ -1,3 +1,6 @@
+server:
+  port: 0
+
 spring:
   application:
     name: STREAM-SINK
@@ -6,5 +9,12 @@ spring:
       bindings:
         input:
           destination: topic
+          group: group1
         output:
           destination: topic
+  rabbitmq:
+    host: 192.168.101.170
+    port: 5672
+    username: admin
+    password: admin
+
