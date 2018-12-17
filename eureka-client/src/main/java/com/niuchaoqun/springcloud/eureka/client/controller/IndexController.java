@@ -29,6 +29,11 @@ public class IndexController {
         return RestResponse.success();
     }
 
+    @RequestMapping(value = "/remove", method = RequestMethod.DELETE)
+    public RestResult remove() {
+        return RestResponse.success("remove success");
+    }
+
     @RequestMapping(value = "/get_param", method = RequestMethod.GET)
     public RestResult getParam(@RequestParam(value = "param1", required = false) String param1) {
         logger.info(param1);
@@ -45,8 +50,6 @@ public class IndexController {
         Record record = Record.builder().user(user).detial(detail).build();
         return RestResponse.data(record);
     }
-
-
 
     @RequestMapping("/get_sleep")
     public RestResult getSleep() {

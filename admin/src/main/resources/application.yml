@@ -1,5 +1,5 @@
 server:
-  port: 9100
+  port: 9200
 
 spring:
   application:
@@ -12,7 +12,7 @@ spring:
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:9000/eureka
+      defaultZone: http://localhost:9100/eureka
     fetch-registry: true
     register-with-eureka: false
     registry-fetch-interval-seconds: 10

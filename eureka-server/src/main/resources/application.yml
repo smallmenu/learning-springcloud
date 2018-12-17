@@ -1,5 +1,5 @@
 server:
-  port: 9000
+  port: 9100
 
 spring:
   application:
@@ -7,7 +7,7 @@ spring:
   boot:
     admin:
       client:
-        url: http://localhost:9100
+        url: http://localhost:9200
         instance:
           prefer-ip: true
         username: admin

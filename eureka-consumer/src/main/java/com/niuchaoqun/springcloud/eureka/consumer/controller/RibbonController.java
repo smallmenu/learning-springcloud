@@ -2,13 +2,18 @@ package com.niuchaoqun.springcloud.eureka.consumer.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.niuchaoqun.springcloud.commons.rest.RestBean;
 import com.niuchaoqun.springcloud.commons.rest.RestResponse;
 import com.niuchaoqun.springcloud.commons.rest.RestResult;
-import com.niuchaoqun.springcloud.eureka.consumer.domain.Record;
-import com.niuchaoqun.springcloud.eureka.consumer.domain.RestRecord;
+import com.niuchaoqun.springcloud.eureka.consumer.dto.json.RestJsonRecord;
+import com.niuchaoqun.springcloud.eureka.consumer.dto.rest.RestRecord;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -66,19 +71,32 @@ public class RibbonController {
     }
 
     @RequestMapping("/get_record/{serviceId}")
-    public RestResult<Record> getRecord(@PathVariable String serviceId) {
-        String json = restTemplate.getForObject("http://" + serviceId + "/get_record", String.class);
+    public RestResult<RestRecord> getRecord(@PathVariable String serviceId) {
+        RestJsonRecord restJsonRecord = restTemplate.getForObject("http://" + serviceId + "/get_record", RestJsonRecord.class);
+        logger.info(restJsonRecord.toString());
 
-        ObjectMapper mapper = new ObjectMapper();
-        RestRecord result = null;
-        try {
-            result = mapper.readValue(json, RestRecord.class);
-        } catch (IOException e) {
-            e.printStackTrace();
+        RestRecord restRecord = RestRecord.builder()
+                .user(restJsonRecord.getData().getUser())
+                .detial(restJsonRecord.getData().getDetial())
+                .build();
+
+        return RestResponse.data(restRecord);
+    }
+
+    @RequestMapping("/remove/{serviceId}")
+    public RestResult remove(@PathVariable String serviceId) {
+        ResponseEntity<RestBean> exchange = restTemplate.exchange("http://" + serviceId + "/remove",
+                HttpMethod.DELETE,
+                new HttpEntity<>(null, null),
+                RestBean.class);
+        if (exchange.getStatusCodeValue() == 200) {
+            RestBean rest = exchange.getBody();
+            if (rest != null && rest.getState()) {
+                return RestResponse.success(rest.getMessage());
+            }
         }
-        logger.info(result.toString());
 
-        return RestResponse.data(result.getData());
+        return RestResponse.fail();
     }
 
     @RequestMapping("/get_sleep/{serviceId}")

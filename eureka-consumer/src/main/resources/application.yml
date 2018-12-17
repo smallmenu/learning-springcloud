@@ -1,5 +1,5 @@
 server:
-  port: 9090
+  port: 8080
 
 spring:
   application:
@@ -13,7 +13,7 @@ eureka:
     lease-expiration-duration-in-seconds: 20
   client:
     service-url:
-      defaultZone: http://localhost:9000/eureka
+      defaultZone: http://localhost:9100/eureka
     register-with-eureka: true
     fetch-registry: true
     registry-fetch-interval-seconds: 10
