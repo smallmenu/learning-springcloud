@@ -7,7 +7,7 @@ import lombok.Data;
 
 @Data
 @Builder
-public class RestRecord {
+public class RecordRest {
     private User user;
     private UserDetail detial;
 }

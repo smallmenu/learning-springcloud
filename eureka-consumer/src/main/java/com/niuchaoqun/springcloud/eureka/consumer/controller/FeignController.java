@@ -1,5 +1,8 @@
 package com.niuchaoqun.springcloud.eureka.consumer.controller;
 
+import com.niuchaoqun.springcloud.commons.rest.RestJson;
+import com.niuchaoqun.springcloud.commons.rest.RestResponse;
+import com.niuchaoqun.springcloud.commons.rest.RestResult;
 import com.niuchaoqun.springcloud.eureka.consumer.feign.EurekaClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,6 +41,13 @@ public class FeignController {
 
         return result;
     }
+    
+    @RequestMapping("/remove")
+    public RestResult remove() {
+        RestJson result = eurekaClient.remove();
+        return RestResponse.data(result);
+    }
+    
 
     @RequestMapping("/get_sleep")
     public String getSleep() {

@@ -1,17 +1,16 @@
 package com.niuchaoqun.springcloud.eureka.consumer.dto.json;
 
-import com.niuchaoqun.springcloud.commons.rest.RestBean;
+import com.niuchaoqun.springcloud.commons.rest.RestJson;
 import com.niuchaoqun.springcloud.eureka.consumer.entity.User;
 import com.niuchaoqun.springcloud.eureka.consumer.entity.UserDetail;
-import lombok.Builder;
 import lombok.Data;
 
 @Data
-public class RestJsonRecord extends RestBean {
-    private DataBean data;
+public class RecordJson extends RestJson {
+    private DataJson data;
 
     @Data
-    public static class DataBean {
+    public static class DataJson {
         private User user;
         private UserDetail detial;
     }
