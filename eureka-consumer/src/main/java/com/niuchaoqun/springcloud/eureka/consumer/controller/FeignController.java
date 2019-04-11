@@ -42,6 +42,15 @@ public class FeignController {
         return result;
     }
 
+    @RequestMapping("/get_path/{path}")
+    public String getPath(@PathVariable(value = "path") String path, @RequestParam(value = "param") String param) {
+        logger.info(path);
+        logger.info(param);
+
+        String result = eurekaClient.getPath(path, param);
+        return result;
+    }
+
     @PostMapping("/post_object")
     public String postObject(User user) {
         logger.info(user.toString());

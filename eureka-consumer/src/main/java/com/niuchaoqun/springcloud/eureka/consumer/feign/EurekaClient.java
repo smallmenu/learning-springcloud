@@ -43,6 +43,14 @@ public interface EurekaClient {
     String getObject(User user);
 
     /**
+     *
+     * @param path
+     * @return
+     */
+    @GetMapping("/get_path/{path}")
+    String getPath(@PathVariable(value = "path") String path, @RequestParam(value = "param") String param);
+
+    /**
      * POST 如果没有注解，会默认使用 @RequestBody，并且通过 payload 传递数据，服务提供方必须使用 @RequestBody 来接受数据
      *
      * RestTemplate 如果传递的是实体，也是 payload 传递

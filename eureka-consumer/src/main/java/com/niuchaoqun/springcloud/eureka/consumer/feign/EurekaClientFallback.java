@@ -17,6 +17,11 @@ public class EurekaClientFallback implements EurekaClient {
     }
 
     @Override
+    public String getPath(String path, String param) {
+        return null;
+    }
+
+    @Override
     public String getSleep() {
         return "fallback";
     }

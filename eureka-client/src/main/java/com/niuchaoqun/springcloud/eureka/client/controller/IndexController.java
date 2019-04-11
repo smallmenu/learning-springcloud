@@ -41,6 +41,12 @@ public class IndexController {
         return RestResponse.data(user);
     }
 
+    @RequestMapping(value = "/get_path/{path}")
+    public RestResult getPath(@PathVariable(value = "path") String path, @RequestParam(value = "param", required = false) String param) {
+        logger.info(path + "/" + param);
+        return RestResponse.data(path + "/" + param);
+    }
+
     @RequestMapping(value = "/post_object", method = RequestMethod.POST)
     public RestResult postObject(@RequestBody User user) {
         logger.info(user.toString());

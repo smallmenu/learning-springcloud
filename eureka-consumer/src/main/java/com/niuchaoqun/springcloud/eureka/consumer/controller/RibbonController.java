@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
-import java.util.HashMap;
 
 /**
  * Ribbon
@@ -77,6 +76,15 @@ public class RibbonController {
         logger.info(user.toString());
 
         String result = restTemplate.getForObject("http://" + serviceId + "/get_object?id={1}&name={2}", String.class, user.getId(), user.getName());
+
+        return result;
+    }
+
+    @RequestMapping("/get_path/{serviceId}/{path}")
+    public String getPath(@PathVariable String serviceId, @PathVariable String path, @RequestParam String param) {
+        logger.info(path);
+
+        String result = restTemplate.getForObject("http://" + serviceId + "/get_path/{1}?param={2}", String.class, path, param);
 
         return result;
     }
